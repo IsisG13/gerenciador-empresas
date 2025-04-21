@@ -36,4 +36,11 @@ class UserRepository
             'number_empresas' => 0,
         ]);
     }
+
+    public function update($id, array $data)
+{
+    $user = $this->model->findOrFail($id);
+    $user->update($data);
+    return $user;
+}
 }

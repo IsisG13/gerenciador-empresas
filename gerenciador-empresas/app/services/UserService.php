@@ -22,4 +22,18 @@ class UserService {
     public function create() {
         return $this->userRepository->create();
     }
+
+    public function update($id, array $data)
+{
+    if (isset($data['password']) && empty($data['password'])) {
+        unset($data['password']);
+    }
+
+    // Se password existir, criptografa
+    if (isset($data['password'])) {
+        $data['password'] = bcrypt($data['password']);
+    }
+
+    return $this->userRepository->update($id, $data);
+}
 }

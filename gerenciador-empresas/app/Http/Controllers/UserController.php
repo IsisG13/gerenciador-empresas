@@ -38,19 +38,22 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255'.$id,
+            'password' => 'sometimes|string|min:8',
+        ]);
+
+        $updatedUser = $this->userService->update($id, $validatedData);
+
+        return response()->json([
+            'message' => 'User editado com sucesso',
+            'user' => $updatedUser
+        ]);
     }
 
     /**

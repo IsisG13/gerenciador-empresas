@@ -20,5 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/teste', [UserController::class, 'index']);
-Route::get('/users', [UserController::class, 'users']);
+
 Route::post('/create/users', [UserController::class, 'create']);
+Route::get('/users', [UserController::class, 'users']);
+Route::put('/edit/{id}/users', [UserController::class, 'edit']);
