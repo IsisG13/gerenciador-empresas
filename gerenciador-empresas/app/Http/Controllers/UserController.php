@@ -38,29 +38,33 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Edita o usuario
      */
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|max:255'.$id,
+            'email' => 'sometimes|string|email|max:255' . $id,
             'password' => 'sometimes|string|min:8',
         ]);
 
         $updatedUser = $this->userService->update($id, $validatedData);
 
         return response()->json([
-            'message' => 'User editado com sucesso',
+            'message' => 'Uusario editado com sucesso',
             'user' => $updatedUser
         ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleta um usuario
      */
     public function destroy(string $id)
     {
-        //
+        $deleted = $this->userService->delete($id);
+        if ($deleted) {
+            return response()->json(['message' => 'Uusario deletado com sucesso.'], 200);
+        }
+        return response()->json(['message' => 'Usuario nao existe.'], 404);
     }
 }

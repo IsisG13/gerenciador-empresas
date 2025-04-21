@@ -38,9 +38,18 @@ class UserRepository
     }
 
     public function update($id, array $data)
-{
-    $user = $this->model->findOrFail($id);
-    $user->update($data);
-    return $user;
-}
+    {
+        $user = $this->model->findOrFail($id);
+        $user->update($data);
+        return $user;
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return $user->delete();
+        }
+        return false;
+    }
 }
