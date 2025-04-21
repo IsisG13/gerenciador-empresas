@@ -21,27 +21,20 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Ver os usuarios
+     */
+    public function users()
+    {
+        $users = $this->userService->users();
+        return response()->json($users);
+    }
+
+    /**
+     * Criar usuarios
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return $this->userService->create();
     }
 
     /**

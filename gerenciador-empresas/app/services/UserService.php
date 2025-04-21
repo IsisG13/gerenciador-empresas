@@ -10,7 +10,16 @@ class UserService {
     public function __construct(UserRepository $userRepository){
         $this->userRepository = $userRepository;
     }
-    public  function index() {
+    public function index() {
         return $this->userRepository->index();
+    }
+
+    public function users() {
+        $user = $this->userRepository->users();
+        return $user;
+    }
+
+    public function create() {
+        return $this->userRepository->create();
     }
 }
